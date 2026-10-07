@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloraPulse - Autonomous Open-Source AI Garden & Plant Intelligence</title>
+  <meta name="description" content="Offline open-weight botanical intelligence describing plant features, required environments, organic maintenance, soil formulation, and screen-minimizing outdoor gardening.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Screen-Minimizing "Touch Grass" Bar -->
+  <aside class="screen-minimizing-banner" id="touch-grass-banner">
+    <div class="banner-left">
+      <span>🌱 <strong>Touch Grass Protocol:</strong> Screen Time is Failure Time. Get your hands in the soil.</span>
+    </div>
+    <div class="banner-right">
+      <span>🌿 Outside Time: <strong id="stat-outdoor-time">0m 0s</strong></span>
+      <span>📱 Screen Glance: <strong id="stat-screen-time">0m 0s</strong></span>
+      <span>✨ Efficiency: <strong id="stat-grass-ratio">100%</strong></span>
+      <button class="btn-pocket-toggle" id="btn-toggle-pocket" title="Engage stealth screen-off pocket mode">
+        🌙 Pocket Mode
+      </button>
+    </div>
+  </aside>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-logo-icon">🌿</div>
+        <div>
+          <h1 class="brand-title">FloraPulse AI</h1>
+          <p class="brand-tagline">Open-Source Botanical Intelligence &amp; Screen-Minimizing Garden Companion</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <div class="status-badge">
+          <span class="badge-pulse"></span>
+          <span>100% Local Inference • Zero Cloud</span>
+        </div>
+        <div class="status-badge highlight">
+          <span>🍂 USDA Zone 5-7 Frost Window Active</span>
+        </div>
+        <div class="status-badge">
+          <span>🛡️ Zero Telemetry Privacy</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs-wrapper">
+    <div class="nav-tabs" role="tablist">
+      <button class="nav-tab-btn active" id="tab-btn-encyclopedia" data-tab="tab-encyclopedia">
+        <span>🌿</span> Plant Encyclopedia
+      </button>
+      <button class="nav-tab-btn" id="tab-btn-advisor" data-tab="tab-advisor">
+        <span>🤖</span> AI Botanical Advisor
+      </button>
+      <button class="nav-tab-btn" id="tab-btn-scanner" data-tab="tab-scanner">
+        <span>🔍</span> AI Leaf Diagnostics
+      </button>
+      <button class="nav-tab-btn" id="tab-btn-calendar" data-tab="tab-calendar">
+        <span>🍂</span> Frost &amp; October Calendar
+      </button>
+      <button class="nav-tab-btn" id="tab-btn-garden" data-tab="tab-garden">
+        <span>🪴</span> My Garden (<span id="my-garden-counter">0</span>)
+      </button>
+      <button class="nav-tab-btn" id="tab-btn-manifesto" data-tab="tab-manifesto">
+        <span>📖</span> Open AI Manifesto
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <main class="main-content">
+
+    <!-- TAB 1: PLANT ENCYCLOPEDIA -->
+    <section class="tab-pane active" id="tab-encyclopedia">
+      <div class="section-header">
+        <h2 class="section-title">Botanical Encyclopedia &amp; Care Profiles</h2>
+        <p class="section-subtitle">Deep environmental parameters, soil pH, organic nutrition, and maintenance protocols for every species.</p>
+      </div>
+
+      <!-- Filter & Search Controls -->
+      <div class="filter-bar">
+        <div class="search-row">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="plant-search-input" class="search-input" placeholder="Search by common name, botanical name, or genus...">
+          </div>
+          <select id="filter-sunlight" class="filter-select">
+            <option value="all">☀️ All Sunlight Levels</option>
+            <option value="full">Full Sun (6+ hrs)</option>
+            <option value="indirect">Bright Indirect / Partial</option>
+            <option value="shade">Low / Full Shade</option>
+          </select>
+          <select id="filter-difficulty" class="filter-select">
+            <option value="all">🌱 All Care Difficulties</option>
+            <option value="Easy">Easy (Beginner)</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Challenging">Challenging</option>
+          </select>
+          <select id="filter-pet-safety" class="filter-select">
+            <option value="all">🐾 All Pet Profiles</option>
+            <option value="safe">Pet-Safe (Non-toxic)</option>
+          </select>
+        </div>
+
+        <!-- Category Pills -->
+        <div class="category-pills" id="category-pills-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Plants Grid -->
+      <div class="plants-grid" id="plants-grid-container">
+        <!-- Dynamically rendered plant cards -->
+      </div>
+    </section>
+
+    <!-- TAB 2: AI BOTANICAL ADVISOR -->
+    <section class="tab-pane" id="tab-advisor">
+      <div class="section-header">
+        <h2 class="section-title">SproutAI Botanical Reasoning Engine</h2>
+        <p class="section-subtitle">Offline local heuristic &amp; botanical reasoning. Ask any question about plant care, soil chemistry, or troubleshooting.</p>
+      </div>
+
+      <div class="advisor-container">
+        <div class="advisor-chat-pane">
+          <div class="chat-history" id="chat-history-container">
+            <div class="chat-message bot">
+              <div class="chat-avatar">🌿</div>
+              <div class="chat-bubble">
+                <h4>Welcome to SproutAI Offline Botanical Advisor!</h4>
+                <p>I am your local-first gardening reasoning engine. I run 100% inside your browser with zero cloud latency and complete data privacy.</p>
+                <p>Ask me about soil mixing, yellow leaves, frost dates, pruning techniques, or type any plant name for a complete environmental prescription!</p>
+                <div class="chat-action-box">
+                  🌱 <strong>Touch Grass Tip:</strong> Spend no more than 60 seconds reading this advice, then go outdoors and observe your plants directly!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-input-area">
+            <div class="chips-row">
+              <button class="prompt-chip" data-prompt="Why are my tomato leaves turning yellow?">🍋 Yellow tomato leaves</button>
+              <button class="prompt-chip" data-prompt="What should I plant in October before frost?">🍂 October planting guide</button>
+              <button class="prompt-chip" data-prompt="How do I make a custom aroid soil mix?">🪴 Best aroid soil mix</button>
+              <button class="prompt-chip" data-prompt="How and when do I prune lavender?">🪻 Pruning lavender</button>
+              <button class="prompt-chip" data-prompt="How do I cure powdery white mildew organically?">🛡️ Powdery mildew fix</button>
+            </div>
+            <form class="chat-form" id="advisor-form">
+              <input type="text" id="advisor-user-input" class="chat-input" placeholder="Ask about any plant, soil issue, pest problem, or seasonal care..." autocomplete="off">
+              <button type="submit" id="btn-submit-chat" class="btn-send-chat">Ask Advisor</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Advisor Sidebar with quick recipes -->
+        <div class="advisor-sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">🧪 Custom Soil Formulations</h3>
+            <div class="recipe-list">
+              <div class="recipe-item">
+                <div class="recipe-name">Chunky Aroid Blend</div>
+                <div class="recipe-desc">35% Orchid Bark, 25% Perlite, 25% Coco Coir, 15% Earthworm Castings. Ideal for Monsteras &amp; Pothos.</div>
+              </div>
+              <div class="recipe-item">
+                <div class="recipe-name">Living Vegetable Bed Blend</div>
+                <div class="recipe-desc">40% Aged Leaf Compost, 40% Sandy Topsoil Loam, 20% Vermiculite + Bone Meal.</div>
+              </div>
+              <div class="recipe-item">
+                <div class="recipe-name">Gritty Cactus/Succulent Mix</div>
+                <div class="recipe-desc">50% Pumice/Bonsai Grit, 30% Perlite, 20% Sifted Potting Soil. Prevents rot.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">⚡ Quick Botanical Rules</h3>
+            <div class="recipe-list">
+              <div class="recipe-item">
+                <div class="recipe-name">The Knuckle Moisture Test</div>
+                <div class="recipe-desc">Insert your index finger 2 inches into soil. Cool and damp = do not water. Warm and dry = drench thoroughly.</div>
+              </div>
+              <div class="recipe-item">
+                <div class="recipe-name">Autumn Nitrogen Rule</div>
+                <div class="recipe-desc">Cease synthetic high-nitrogen feed 6 weeks before frost to prevent frost-tender shoot kill.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: AI LEAF DIAGNOSTIC SCANNER -->
+    <section class="tab-pane" id="tab-scanner">
+      <div class="section-header">
+        <h2 class="section-title">AI Leaf &amp; Plant Diagnostic Scanner</h2>
+        <p class="section-subtitle">Local colorimetric and pattern analysis identifying nutritional deficiencies, fungal pathogens, and environmental stress.</p>
+      </div>
+
+      <div class="scanner-grid">
+        <div class="scanner-left">
+          <h3 style="color: var(--emerald-400); font-size: 1.1rem;">Upload or Test Sample Symptoms</h3>
+          
+          <label class="drop-zone" id="leaf-drop-zone">
+            <input type="file" id="leaf-file-input" accept="image/*" style="display: none;">
+            <div class="drop-icon">🍃</div>
+            <div class="drop-text">Click to Upload Leaf Photo or Drag &amp; Drop</div>
+            <div class="drop-sub">Runs 100% locally on your machine — zero images leave your browser</div>
+          </label>
+
+          <div style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.5rem;">Or test one-click common garden symptom cases:</div>
+
+          <div class="sample-diagnostics-bar">
+            <button class="sample-diag-btn" data-diag="yellow_leaves_chlorosis">
+              <span>🍋 <strong>Interveinal Chlorosis</strong> (Yellowing Leaves)</span>
+              <span>Inspect →</span>
+            </button>
+            <button class="sample-diag-btn" data-diag="brown_crispy_tips">
+              <span>🍂 <strong>Brown Crispy Edges</strong> (Low Humidity / Salts)</span>
+              <span>Inspect →</span>
+            </button>
+            <button class="sample-diag-btn" data-diag="powdery_mildew">
+              <span>❄️ <strong>Powdery Mildew</strong> (Fungal White Powder)</span>
+              <span>Inspect →</span>
+            </button>
+            <button class="sample-diag-btn" data-diag="leggy_seedlings">
+              <span>🌱 <strong>Leggy Floppy Seedlings</strong> (Light Starvation)</span>
+              <span>Inspect →</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="scanner-right" id="diagnostic-results-container">
+          <h3 style="color: var(--emerald-400); font-size: 1.1rem;">Diagnostic Report</h3>
+          <div id="diagnostic-output" style="color: var(--text-dim); font-size: 0.9rem;">
+            <p>Select a symptom case or upload a leaf photo to generate an instant botanical diagnostic report, environmental causes, and organic treatments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: FROST & OCTOBER PLANTING CALENDAR -->
+    <section class="tab-pane" id="tab-calendar">
+      <div class="section-header">
+        <h2 class="section-title">Hyperlocal Frost Window &amp; Autumn Garden Planner</h2>
+        <p class="section-subtitle">Real-time microclimate calendar based on USDA Hardiness Zones. Critical tasks for the current week (October 2026).</p>
+      </div>
+
+      <div class="calendar-banner">
+        <div class="zone-selector-box">
+          <label for="select-usda-zone" style="font-weight: 600; font-size: 0.95rem;">Select Your USDA Zone:</label>
+          <select id="select-usda-zone" class="filter-select" style="min-width: 180px;">
+            <option value="Zone 4">Zone 4 (First Frost: Sep 25)</option>
+            <option value="Zone 5">Zone 5 (First Frost: Oct 05)</option>
+            <option value="Zone 6" selected>Zone 6 (First Frost: Oct 18)</option>
+            <option value="Zone 7">Zone 7 (First Frost: Nov 05)</option>
+            <option value="Zone 8">Zone 8 (First Frost: Nov 25)</option>
+          </select>
+        </div>
+
+        <div class="frost-countdown-box">
+          <div class="countdown-digits" id="frost-countdown-days">11 Days</div>
+          <div class="countdown-label" id="frost-status-label">Until Average First Killing Fall Frost</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h3 style="font-size: 1.25rem; color: #fff;">Priority Tasks for October 2026</h3>
+        <p class="section-subtitle">High-impact outdoor tasks to complete before ground freezing sets in.</p>
+      </div>
+
+      <div class="tasks-grid" id="october-tasks-container">
+        <!-- Dynamically populated from sample-data.js -->
+      </div>
+    </section>
+
+    <!-- TAB 5: MY GARDEN TRACKER -->
+    <section class="tab-pane" id="tab-garden">
+      <div class="my-garden-header">
+        <div>
+          <h2 class="section-title">My Garden Bed &amp; Greenhouse Collection</h2>
+          <p class="section-subtitle">Track your living plants, log watering schedules, and record growth notes offline.</p>
+        </div>
+        <button class="btn-send-chat" id="btn-browse-to-add">➕ Add More Plants</button>
+      </div>
+
+      <div id="my-garden-grid" class="plants-grid">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- TAB 6: OPEN-SOURCE AI MANIFESTO -->
+    <section class="tab-pane" id="tab-manifesto">
+      <div class="section-header">
+        <h2 class="section-title">Why Open-Source AI is Built to Touch Grass</h2>
+        <p class="section-subtitle">Hacktoberfest 2026 Open-Source AI Challenge Submission: Grounding intelligence in physical reality.</p>
+      </div>
+
+      <div class="manifesto-card">
+        <h3>1. The Backcountry Problem: Closed APIs Die in the Dirt</h3>
+        <p>Gardens, allotment plots, community orchards, and wilderness trails share one universal trait: <strong>zero to terrible cellular reception</strong>. When you need to know whether to pinch tomato suckers or identify powdery mildew on wet cucumber vines, a closed API requiring roundtrips to remote cloud servers fails instantly.</p>
+        <p>By hosting open-weight models and botanical inference entirely client-side, <strong>FloraPulse operates 100% offline</strong>. It requires zero API keys, never times out on the trail, and costs $0.00 to run for a lifetime.</p>
+
+        <h3>2. Sensory &amp; Location Privacy</h3>
+        <p>Gardening and outdoor exploration involve sensitive personal data: precise GPS coordinates of personal backyards, microclimate temperature readings, and camera captures of home environments. Sending continuous sensor streams to proprietary corporate servers creates surveillance telemetry. With open-source local AI, <strong>your location, plant photos, and garden notes never leave your personal silicon</strong>.</p>
+
+        <h3>3. "Screen Time is Failure Time": The Touch Grass Philosophy</h3>
+        <p>Modern applications are designed by attention economy metrics—they want you glued to the glass screen for 4 hours a day. FloraPulse is intentionally designed with an <strong>inverted success metric</strong>: the shorter your time on screen, the more successful the software.</p>
+        <p>Our <strong>"Pocket Mode"</strong> dims your screen to pure stealth OLED black, delivers audio-cued alerts via gentle harmonic chimes, and speaks concise 2-second guidance so you can put your phone in your pocket and get your hands deep in the soil.</p>
+
+        <h3>4. System Architecture</h3>
+        <div class="code-block-box">
+┌────────────────────────────────────────────────────────┐
+│             FloraPulse Local-First Architecture        │
+└────────────────────────────────────────────────────────┘
+                       │
+       ┌───────────────┴───────────────┐
+       ▼                               ▼
+┌───────────────┐               ┌───────────────┐
+│ Web Audio API │               │ Local Storage │
+│ (Bio-Acoustic │               │ (Offline Zero │
+│ Spectrogram)  │               │ Cloud Cache)  │
+└───────┬───────┘               └───────┬───────┘
+        │                               │
+        └───────────────┬───────────────┘
+                        ▼
+       ┌─────────────────────────────────┐
+       │     Open Botanical AI Engine    │
+       │  (Client-Side Heuristic Model)  │
+       └────────────────┬────────────────┘
+                        │
+                        ▼
+       ┌─────────────────────────────────┐
+       │   Pocket Mode Audio Synthesizer │
+       │  (Ambient Chimes & Voice Cues)  │
+       └─────────────────────────────────┘
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Plant Detail Modal / Drawer -->
+  <div class="modal-overlay" id="plant-modal-overlay">
+    <div class="plant-modal-card" id="plant-modal-content">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div class="plant-icon-box" id="modal-plant-icon" style="background: var(--emerald-700);">🌿</div>
+          <div>
+            <h3 id="modal-plant-name" style="font-size: 1.5rem; color: #fff;">Plant Name</h3>
+            <p id="modal-plant-sci" style="color: var(--emerald-400); font-style: italic;">Scientific Name</p>
+            <p id="modal-plant-family" style="font-size: 0.78rem; color: var(--text-dim);">Family</p>
+          </div>
+        </div>
+        <button class="btn-close-modal" id="btn-close-modal" title="Close details">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Touch Grass Action Callout -->
+        <div class="touch-grass-callout">
+          <div class="touch-grass-icon">🌱</div>
+          <div>
+            <div class="touch-grass-title">Touch Grass Action (Next 60 Seconds)</div>
+            <div class="touch-grass-text" id="modal-touch-grass-text">Do this right now in your garden...</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Features -->
+        <div class="detail-section">
+          <h4 class="detail-heading">🌿 Botanical Features &amp; Anatomy</h4>
+          <div class="detail-grid">
+            <div class="detail-data-item">
+              <span class="detail-data-label">Mature Dimensions</span>
+              <span class="detail-data-val" id="modal-feat-height">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Growth Rate</span>
+              <span class="detail-data-val" id="modal-feat-growth">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Foliage Anatomy</span>
+              <span class="detail-data-val" id="modal-feat-foliage">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Pet Toxicity</span>
+              <span class="detail-data-val" id="modal-feat-pets">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Environment -->
+        <div class="detail-section">
+          <h4 class="detail-heading">☀️ Required Environment &amp; Microclimate</h4>
+          <div class="detail-grid">
+            <div class="detail-data-item">
+              <span class="detail-data-label">Sunlight Exposure</span>
+              <span class="detail-data-val" id="modal-env-sun">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Soil Composition</span>
+              <span class="detail-data-val" id="modal-env-soil">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Optimal Soil pH</span>
+              <span class="detail-data-val" id="modal-env-ph">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Hardiness Zones</span>
+              <span class="detail-data-val" id="modal-env-zones">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Temperature Range</span>
+              <span class="detail-data-val" id="modal-env-temp">-</span>
+            </div>
+            <div class="detail-data-item">
+              <span class="detail-data-label">Humidity Level</span>
+              <span class="detail-data-val" id="modal-env-humidity">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Maintenance & Care -->
+        <div class="detail-section">
+          <h4 class="detail-heading">💧 Maintenance, Watering &amp; Pruning</h4>
+          <div class="detail-grid" style="grid-template-columns: 1fr; gap: 0.8rem;">
+            <div>
+              <span class="detail-data-label">Watering Protocol</span>
+              <p class="detail-data-val" id="modal-maint-water" style="margin-top: 0.2rem;">-</p>
+            </div>
+            <div>
+              <span class="detail-data-label">Fertilization &amp; Organic Nutrition</span>
+              <p class="detail-data-val" id="modal-maint-fert" style="margin-top: 0.2rem;">-</p>
+            </div>
+            <div>
+              <span class="detail-data-label">Pruning &amp; Pinching Guide</span>
+              <p class="detail-data-val" id="modal-maint-prune" style="margin-top: 0.2rem;">-</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Pests, Diseases & Companions -->
+        <div class="detail-section">
+          <h4 class="detail-heading">🛡️ Pest Defense &amp; Companion Guilds</h4>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div>
+              <span class="detail-data-label">Common Pests &amp; Organic Remedies</span>
+              <div id="modal-pests-list" style="margin-top: 0.4rem; font-size: 0.88rem; color: #cbd5e1;">-</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.4rem;">
+              <div>
+                <span class="detail-data-label" style="color: var(--emerald-400);">Beneficial Companions</span>
+                <p id="modal-companions-good" style="font-size: 0.85rem; color: #a7f3d0; margin-top: 0.2rem;">-</p>
+              </div>
+              <div>
+                <span class="detail-data-label" style="color: var(--terracotta-light);">Antagonistic Neighbors</span>
+                <p id="modal-companions-bad" style="font-size: 0.85rem; color: #fca5a5; margin-top: 0.2rem;">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Footer -->
+        <div style="display: flex; gap: 1rem; justify-content: flex-end; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+          <button class="btn-send-chat" id="btn-modal-add-garden" style="background: var(--terracotta); color: #fff;">
+            🪴 Add to My Garden Collection
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stealth Pocket Mode Overlay -->
+  <div class="pocket-mode-screen" id="pocket-mode-screen">
+    <div class="pocket-pulse-ring">🌱</div>
+    <h2 class="pocket-title">Stealth Pocket Mode Active</h2>
+    <p class="pocket-sub">Screen backlight minimized to zero. Put your phone in your pocket. Ambient chimes will alert you when outdoor timers or garden alerts trigger.</p>
+    <div style="margin-bottom: 2rem; font-size: 1.1rem; color: #86efac;">
+      Outdoor Soil Time: <strong id="pocket-outdoor-timer">0m 0s</strong>
+    </div>
+    <button class="btn-exit-pocket" id="btn-exit-pocket">
+      ☀️ Wake Screen &amp; Return to Garden
+    </button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="sample-data.js"></script>
+  <script src="plants-data.js"></script>
+  <script src="audio-engine.js"></script>
+  <script src="vision-engine.js"></script>
+  <script src="quest-engine.js"></script>
+  <script src="ai-advisor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
